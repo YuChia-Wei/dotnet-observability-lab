@@ -1,0 +1,34 @@
+{
+  "ReverseProxy": {
+    "Clusters": {
+      "default-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "http://lab.swagger/"
+          }
+        }
+      },
+      "dotnet6-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "http://lab-dotnet6-webapi/"
+          }
+        }
+      },
+      "dotnet7-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "http://lab-dotnet7-webapi/"
+          }
+        }
+      },
+      "outbound-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "http://outbound-webapi/"
+          }
+        }
+      }
+    }
+  }
+}

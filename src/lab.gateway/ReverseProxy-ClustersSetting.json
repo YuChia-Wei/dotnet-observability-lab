@@ -1,0 +1,35 @@
+{
+  "ReverseProxy": {
+    "Clusters": {
+      "default-cluster": {
+        "Destinations": {
+          "first_destination": {
+            //swagger
+            "Address": "https://localhost:5001"
+          }
+        }
+      },
+      "dotnet6-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "https://localhost:7196"
+          }
+        }
+      },
+      "dotnet7-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "https://localhost:7153"
+          }
+        }
+      },
+      "outbound-webapi-cluster": {
+        "Destinations": {
+          "first_destination": {
+            "Address": "https://localhost:7232"
+          }
+        }
+      }
+    }
+  }
+}

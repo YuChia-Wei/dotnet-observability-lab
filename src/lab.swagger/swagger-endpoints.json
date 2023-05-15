@@ -1,0 +1,30 @@
+﻿{
+  "ApiEndpointSetting": {
+    "ApiEndpoints": [
+      {
+        "EnableSwagger": true,
+        "ServiceName": "dotnet6-api",
+        "JsonUri": "https://localhost:7196/swagger/v1/swagger.json",
+        "ServerHostList": [
+          "https://localhost:64430/api/dotnet6"
+        ]
+      },
+      {
+        "EnableSwagger": true,
+        "ServiceName": "dotnet7-api",
+        "JsonUri": "https://localhost:7153/swagger/v1/swagger.json",
+        "ServerHostList": [
+          "https://localhost:64430/api/dotnet7"
+        ]
+      },
+      {
+        "EnableSwagger": true,
+        "ServiceName": "outbound-api",
+        "JsonUri": "https://localhost:7232/swagger/v1/swagger.json",
+        "ServerHostList": [
+          "https://localhost:64430/api/outbound"
+        ]
+      }
+    ]
+  }
+}

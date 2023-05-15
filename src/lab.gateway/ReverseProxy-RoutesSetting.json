@@ -1,0 +1,53 @@
+{
+  "ReverseProxy": {
+    "Routes": {
+      "default-route": {
+        "ClusterId": "default-cluster",
+        "AuthorizationPolicy": "Anonymous",
+        "CorsPolicy": "CorsPolicy",
+        "Match": {
+          "Path": "{**catchall}"
+        }
+      },
+      "dotnet6-webapi-route": {
+        "ClusterId": "dotnet6-webapi-cluster",
+        "AuthorizationPolicy": "Anonymous",
+        "CorsPolicy": "CorsPolicy",
+        "Match": {
+          "Path": "/api/dotnet6/{**catchall}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/dotnet6"
+          }
+        ]
+      },
+      "dotnet7-webapi-route": {
+        "ClusterId": "dotnet7-webapi-cluster",
+        "AuthorizationPolicy": "Anonymous",
+        "CorsPolicy": "CorsPolicy",
+        "Match": {
+          "Path": "/api/dotnet7/{**catchall}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/dotnet7"
+          }
+        ]
+      },
+      "outbound-webapi-route": {
+        "ClusterId": "outbound-webapi-cluster",
+        "AuthorizationPolicy": "Anonymous",
+        "CorsPolicy": "CorsPolicy",
+        "Match": {
+          "Path": "/api/outbound/{**catchall}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/outbound"
+          }
+        ]
+      }
+    }
+  }
+}
