@@ -29,7 +29,5 @@ public static class SwaggerSettingExtension
                 options.IncludeXmlComments(xmlFile);
             }
         });
-
-        services.AddSwaggerGenNewtonsoftSupport();
     }
 }
