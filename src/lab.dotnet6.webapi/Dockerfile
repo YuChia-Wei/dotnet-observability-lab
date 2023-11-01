@@ -1,9 +1,9 @@
-﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:6.0-bullseye-slim AS base
+﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:6.0-bookworm-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0-bookworm-slim AS build
 WORKDIR /src
 COPY ["nuget.config", "."]
 COPY ["observability.component/observability.component.csproj", "observability.component/"]
