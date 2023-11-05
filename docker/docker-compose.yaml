@@ -21,9 +21,9 @@ services:
     ports:
       - "8080:80"
   
-  lab.swagger:
-    container_name: lab.swagger
-    image: lab.swagger:dev
+  lab-swagger:
+    container_name: lab-swagger
+    image: lab-swagger:dev
     build:
       context: ../src
       dockerfile: ../src/lab.swagger/Dockerfile
