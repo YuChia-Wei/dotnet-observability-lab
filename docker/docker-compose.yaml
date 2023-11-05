@@ -17,6 +17,7 @@ services:
     depends_on:
       - lab-dotnet6-webapi
       - lab-dotnet7-webapi
+      - lab-dotnet8-webapi
     ports:
       - "8080:80"
   
@@ -65,6 +66,25 @@ services:
       #- lab-network
     env_file:
       - ./env-file/dotnet7-webapi-otel.env
+    environment:
+      - REDISCONNECTION=redis:6379
+      - DBCONNECTION=User ID=postgres;Password=mysecretpassword;Host=postgres;Port=5432;Database=postgres;Pooling=true;
+    depends_on:
+      - lab-outbound-webapi
+      - redis
+      - otel-collector-contrib
+      - postgres
+
+  lab-dotnet8-webapi:
+    container_name: lab-dotnet8-webapi
+    image: lab-dotnet8-webapi:dev
+    build:
+      context: ../src
+      dockerfile: ../src/lab.dotnet8.webapi/Dockerfile
+    #networks:
+      #- lab-network
+    env_file:
+      - ./env-file/dotnet8-webapi-otel.env
     environment:
       - REDISCONNECTION=redis:6379
       - DBCONNECTION=User ID=postgres;Password=mysecretpassword;Host=postgres;Port=5432;Database=postgres;Pooling=true;

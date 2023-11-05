@@ -19,6 +19,14 @@
       },
       {
         "EnableSwagger": true,
+        "ServiceName": "dotnet8-api",
+        "JsonUri": "http://lab-dotnet8-webapi:8080/swagger/v1/swagger.json",
+        "ServerHostList": [
+          "http://localhost:8080/api/dotnet8"
+        ]
+      },
+      {
+        "EnableSwagger": true,
         "ServiceName": "outbound-api",
         "JsonUri": "http://lab-outbound-webapi/swagger/v1/swagger.json",
         "ServerHostList": [
