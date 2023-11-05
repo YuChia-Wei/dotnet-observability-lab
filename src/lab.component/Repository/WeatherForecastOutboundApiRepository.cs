@@ -34,7 +34,7 @@ public class WeatherForecastOutboundApiRepository
         };
 
         var responseMessage =
-            await this._httpClient.GetAsync($"http://outbound-webapi/WeatherForecast/{dataSource}?startDate={startDate}&endDate={endDate}", cancellationToken);
+            await this._httpClient.GetAsync($"http://lab-outbound-webapi/WeatherForecast/{dataSource}?startDate={startDate}&endDate={endDate}", cancellationToken);
 
         var httpResponseMessage = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
         var weatherForecasts = Parse<IEnumerable<WeatherForecast>>(httpResponseMessage);
