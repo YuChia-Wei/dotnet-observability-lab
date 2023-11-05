@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using observability.component.Tracing;
 
 namespace lab.dotnet8.webapi.Controllers;
 
+/// <inheritdoc />
 [ApiController]
 [Route("[controller]")]
+[MethodTracing]
 public class LoggerController : ControllerBase
 {
     private readonly ILogger<LoggerController> _logger;
@@ -18,7 +21,7 @@ public class LoggerController : ControllerBase
     {
         this._logger.LogInformation("Throw Exception");
 
-        throw new Dotnet7Exception();
+        throw new Dotnet8Exception();
     }
 
     /// <summary>
@@ -39,6 +42,6 @@ public class LoggerController : ControllerBase
     }
 }
 
-public class Dotnet7Exception : Exception
+public class Dotnet8Exception : Exception
 {
 }
