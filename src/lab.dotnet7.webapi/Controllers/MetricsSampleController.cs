@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using observability.component.Tracing;
 
 namespace lab.dotnet7.webapi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[MethodTracing]
 public class MetricsSampleController : Controller
 {
     [HttpPost("counter")]

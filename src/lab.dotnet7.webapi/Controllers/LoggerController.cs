@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using observability.component.Tracing;
 
 namespace lab.dotnet7.webapi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[MethodTracing]
 public class LoggerController : ControllerBase
 {
     private readonly ILogger<LoggerController> _logger;
@@ -37,8 +39,4 @@ public class LoggerController : ControllerBase
 
         return Task.FromResult<IActionResult>(this.Ok());
     }
-}
-
-public class Dotnet7Exception : Exception
-{
 }

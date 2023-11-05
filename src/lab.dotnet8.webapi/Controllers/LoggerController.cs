@@ -41,7 +41,3 @@ public class LoggerController : ControllerBase
         return Task.FromResult<IActionResult>(this.Ok());
     }
 }
-
-public class Dotnet8Exception : Exception
-{
-}

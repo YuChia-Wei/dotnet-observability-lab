@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using observability.component.Tracing;
 
 namespace lab.dotnet6.webapi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[MethodTracing]
 public class LoggerController : ControllerBase
 {
     private readonly ILogger<LoggerController> _logger;
