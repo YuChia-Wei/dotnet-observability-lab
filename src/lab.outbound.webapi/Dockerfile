@@ -1,4 +1,4 @@
-﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:7.0-bookworm-slim AS base
+﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:8.0-bookworm-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -14,7 +14,7 @@ RUN dotnet restore "lab.outbound.webapi/lab.outbound.webapi.csproj"
 COPY . .
 WORKDIR "/src/lab.outbound.webapi"
 RUN dotnet build "lab.outbound.webapi.csproj" \
-    -f net7.0 \
+    -f net8.0 \
     -c Release \
     -o /app/build \
     --os linux \
@@ -22,7 +22,7 @@ RUN dotnet build "lab.outbound.webapi.csproj" \
 
 FROM build AS publish
 RUN dotnet publish "lab.outbound.webapi.csproj" \
-    -f net7.0 \
+    -f net8.0 \
     -c Release \
     -o /app/publish \
     --os linux \

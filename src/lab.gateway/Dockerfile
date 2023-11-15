@@ -1,6 +1,7 @@
-﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:7.0-alpine AS base
+﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 8080
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
@@ -12,7 +13,7 @@ RUN dotnet restore "lab.gateway/lab.gateway.csproj"
 COPY . .
 WORKDIR "/src/lab.gateway"
 RUN dotnet build "lab.gateway.csproj" \
-    -f net7.0 \
+    -f net8.0 \
     -c Release \
     -o /app/build \
     --os linux-musl \
@@ -20,7 +21,7 @@ RUN dotnet build "lab.gateway.csproj" \
 
 FROM build AS publish
 RUN dotnet publish "lab.gateway.csproj" \
-    -f net7.0 \
+    -f net8.0 \
     -c Release \
     -o /app/publish \
     --os linux-musl \
