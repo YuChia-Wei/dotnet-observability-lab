@@ -7,6 +7,5 @@ namespace lab.gateway.Infrastructure.YarpComponents.Metrics;
 /// </summary>
 public static class MyMeter
 {
-    public static readonly Meter Meter = new(Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME") ??
-                                             AppDomain.CurrentDomain.FriendlyName.ToLower().Replace('.', '-'));
+    public static readonly Meter Meter = new("lab.observability.library");
 }
