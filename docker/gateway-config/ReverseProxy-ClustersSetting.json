@@ -32,7 +32,7 @@
       "outbound-webapi-cluster": {
         "Destinations": {
           "first_destination": {
-            "Address": "http://outbound-webapi/"
+            "Address": "http://lab-outbound-webapi:8080/"
           }
         }
       }

@@ -19,7 +19,7 @@ services:
       - lab-dotnet7-webapi
       - lab-dotnet8-webapi
     ports:
-      - "8080:80"
+      - "8080:8080"
   
   lab-swagger:
     container_name: lab-swagger
@@ -36,6 +36,8 @@ services:
 #    depends_on:
 #      - lab-dotnet6-webapi
 #      - lab-dotnet7-webapi
+#      - lab-dotnet8-webapi
+#      - lab-outbound-webapi
   
   lab-dotnet6-webapi:
     container_name: lab-dotnet6-webapi
