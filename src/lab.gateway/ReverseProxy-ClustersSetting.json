@@ -4,7 +4,6 @@
       "default-cluster": {
         "Destinations": {
           "first_destination": {
-            //swagger
             "Address": "https://localhost:5001"
           }
         }

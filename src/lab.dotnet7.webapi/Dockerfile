@@ -3,7 +3,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0-bookworm-slim AS build
+#FROM mcr.microsoft.com/dotnet/sdk:7.0-bookworm-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /src
 COPY ["nuget.config", "."]
 COPY ["observability.component/observability.component.csproj", "observability.component/"]
@@ -12,10 +13,20 @@ COPY ["lab.dotnet7.webapi/lab.dotnet7.webapi.csproj", "lab.dotnet7.webapi/"]
 RUN dotnet restore "lab.dotnet7.webapi/lab.dotnet7.webapi.csproj"
 COPY . .
 WORKDIR "/src/lab.dotnet7.webapi"
-RUN dotnet build "lab.dotnet7.webapi.csproj" -c Release -o /app/build
+RUN dotnet build "lab.dotnet7.webapi.csproj" \
+    -f net7.0 \
+    -c Release \
+    -o /app/build \
+    --os linux \
+    --arch x64
 
 FROM build AS publish
-RUN dotnet publish "lab.dotnet7.webapi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "lab.dotnet7.webapi.csproj" \
+    -f net7.0 \
+    -c Release \
+    -o /app/publish \
+    --os linux \
+    --arch x64
 
 FROM base AS final
 WORKDIR /app

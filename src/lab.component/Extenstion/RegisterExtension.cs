@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Dapper;
 using lab.component.EfCore;
 using lab.component.Repository;
@@ -81,16 +80,12 @@ public static class RegisterExtension
     {
         public override TimeOnly Parse(object value)
         {
-            if (value.GetType() == typeof(DateTime))
+            return value switch
             {
-                return TimeOnly.FromDateTime((DateTime)value);
-            }
-            else if (value.GetType() == typeof(TimeSpan))
-            {
-                return TimeOnly.FromTimeSpan((TimeSpan)value);
-            }
-
-            return default;
+                DateTime time => TimeOnly.FromDateTime(time),
+                TimeSpan span => TimeOnly.FromTimeSpan(span),
+                _ => default
+            };
         }
 
         public override void SetValue(IDbDataParameter parameter, TimeOnly value)

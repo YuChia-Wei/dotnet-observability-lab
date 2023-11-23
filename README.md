@@ -24,3 +24,16 @@
 
 - https://stackoverflow.com/questions/69187622/how-can-i-use-dateonly-timeonly-query-parameters-in-asp-net-core-6
 - https://github.com/maxkoshevoi/DateOnlyTimeOnly.AspNet/tree/main
+
+## dotnet 8
+
+- [dotnet doc: all metrics](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/built-in-metrics-aspnetcore?view=aspnetcore-8.0)
+- [Grafana AspNetCore Dashboard](https://github.com/JamesNK/aspnetcore-grafana/tree/main/dashboards)
+- dotnet 8 meter name
+  - Microsoft.AspNetCore.Hosting
+  - Microsoft.AspNetCore.Server.Kestrel
+  - sample:
+    ```csharp
+    builder.AddMeter("Microsoft.AspNetCore.Hosting",
+                     "Microsoft.AspNetCore.Server.Kestrel");
+    ```
