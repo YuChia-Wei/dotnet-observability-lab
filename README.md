@@ -1,6 +1,16 @@
 # dotnet observability lab
 
-此份練習專案中的 .net server 都使用我另外一個專案 " [otel-dotnet-auto-instrumentation](https://github.com/YuChia-Wei/otel-dotnet-auto-instrumentation) " 所建立出來的 image，該專案目前已設定完成 alpine, bullseye-slim 兩個 OS 的 .net 6.0 / .net 7.0 的 image 發布，但是我尚未研究發佈 package 後的 image sign，不確定這會有什麼影響。如果你有安全性的顧慮，你可以 clone 該專案回去後，自行建立對應的 image base 後再進行此專案的建置與執行。
+此份練習專案中的 aspnetcore base image 都使用我另外一個專案 " [otel-dotnet-auto-instrumentation](https://github.com/YuChia-Wei/otel-dotnet-auto-instrumentation) " 為基礎。
+如果對該容器基底有安全性疑慮，可以自行調整容器。
+
+另外，此份專案有兩個比較特別的功能專案，分別是 swagger hub 跟 api gateway (使用 yarp 建立)，可以在我的 github 中找到單獨的 repo
+- swagger hub
+  - [github]()
+- yarp gateway
+  - [github](https://github.com/YuChia-Wei/application-gateway-lab)
+  > 我正打算開發 yarp 專用的 gateway 管理工具 [yarp-controller](https://github.com/YuChia-Wei/yarp-controller)，不過還只在想法階段，希望哪天可以建起來。
+- webapi
+  - [github](https://github.com/YuChia-Wei/dotnet-webapi-lab)
 
 ## architecture
 
