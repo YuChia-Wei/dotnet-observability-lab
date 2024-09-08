@@ -42,3 +42,17 @@
                      "Microsoft.AspNetCore.Server.Kestrel");
     ```
     > 由於 OpenTelemetry 的自動追蹤工具已經內建相關設定，如果有安裝自動追蹤工具或是使用我的基礎容器的話，可以不需要自行加入
+
+## aspire resource
+
+- install
+  ```shell
+  dotnet workload install aspire
+  ```
+- use template
+  ```shell
+  dotnet new aspire-starter --use-redis-cache --output AspireSample
+  ```
+- with keycloak
+  [.NET Aspire Keycloak integration](https://learn.microsoft.com/en-us/dotnet/aspire/authentication/keycloak-integration?tabs=dotnet-cli)
+  [Using Keycloak in .NET Aspire projects](https://nikiforovall.github.io/dotnet/keycloak/2024/06/02/aspire-support-for-keycloak.html)
