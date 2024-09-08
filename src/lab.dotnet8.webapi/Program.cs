@@ -1,10 +1,10 @@
 using System.Net.Mime;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
-using Microsoft.AspNetCore.HttpOverrides;
 using lab.component.Extenstion;
 using lab.dotnet8.webapi.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +57,12 @@ builder.Services.AddHealthChecks();
 builder.Services.RegisterDepend();
 
 builder.Services.AddMediator(o => o.ServiceLifetime = ServiceLifetime.Scoped);
+
+//aspire component
+if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
+{
+    builder.AddServiceDefaults();
+}
 
 var app = builder.Build();
 
@@ -112,6 +118,12 @@ app.UseHealthChecks("/health");
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+//aspire middleware
+if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
+{
+    app.MapDefaultEndpoints();
+}
 
 app.MapControllers();
 
