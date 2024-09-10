@@ -32,7 +32,7 @@ exporters:
       enabled: true
   
   prometheusremotewrite:
-    endpoint: "http://remote-prometheus:9090/api/v1/push"
+    endpoint: "http://prometheus:9090/api/v1/push"
     tls:
       insecure: true
     resource_to_telemetry_conversion:
@@ -68,4 +68,4 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [prometheus]
-      # exporters: [prometheusremotewrite]
+#      exporters: [prometheusremotewrite]

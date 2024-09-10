@@ -56,3 +56,22 @@
 - with keycloak
   [.NET Aspire Keycloak integration](https://learn.microsoft.com/en-us/dotnet/aspire/authentication/keycloak-integration?tabs=dotnet-cli)
   [Using Keycloak in .NET Aspire projects](https://nikiforovall.github.io/dotnet/keycloak/2024/06/02/aspire-support-for-keycloak.html)
+
+## database
+
+本機不使用 dockerfile 執行時，會需要自己準備 database，可利用 [這目錄](./docker/sql) 中的語法配合本機用 docker 執行資料庫做開發
+
+docker 啟動資料庫的語法
+
+```bash
+docker run -d \
+  --name postgres \
+  --restart always \
+  -e POSTGRES_DB=postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -v $(pwd)/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql \
+  -v $(pwd)/sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql \
+  -p 5432:5432 \
+  postgres:16-alpine
+```
