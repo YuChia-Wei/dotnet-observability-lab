@@ -16,7 +16,8 @@
 
     <ItemGroup>
         <ProjectReference Include="..\lab.dotnet8.webapi\lab.dotnet8.webapi.csproj" />
-        <ProjectReference Include="..\lab.dotnet6.webapi\lab.dotnet6.webapi.csproj" />
+<!--        <ProjectReference Include="..\lab.dotnet6.webapi\lab.dotnet6.webapi.csproj" />-->
+        <ProjectReference Include="..\lab.outbound.webapi\lab.outbound.webapi.csproj" />
     </ItemGroup>
 
 </Project>

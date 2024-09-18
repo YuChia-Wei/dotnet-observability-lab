@@ -37,6 +37,12 @@ builder.Services.RegisterDepend();
 
 builder.Services.AddMediator(o => o.ServiceLifetime = ServiceLifetime.Scoped);
 
+//aspire component
+if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
+{
+    builder.AddServiceDefaults();
+}
+
 var app = builder.Build();
 
 app.UseCors("CorsPolicy");
@@ -60,6 +66,12 @@ app.UseHealthChecks("/health");
 // app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+//aspire middleware
+if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
+{
+    app.MapDefaultEndpoints();
+}
 
 app.MapControllers();
 
