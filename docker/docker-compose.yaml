@@ -94,7 +94,7 @@ services:
       - postgres
 
   otel-collector-contrib:
-    image: otel/opentelemetry-collector-contrib:0.88.0
+    image: otel/opentelemetry-collector-contrib:0.110.0
     restart: always
     container_name: otel-collector-contrib
     command: [ "--config=/etc/otel-collector.yaml" ]
