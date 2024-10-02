@@ -16,7 +16,6 @@ services:
       - ./gateway-config/ReverseProxy-RoutesSetting.json:/app/ReverseProxy-RoutesSetting.json
     depends_on:
       - lab-dotnet6-webapi
-      - lab-dotnet7-webapi
       - lab-dotnet8-webapi
     ports:
       - "8080:8080"
@@ -58,25 +57,6 @@ services:
       - otel-collector-contrib
       - postgres
   
-  lab-dotnet7-webapi:
-    container_name: lab-dotnet7-webapi
-    image: lab-dotnet7-webapi:dev
-    build:
-      context: ../src
-      dockerfile: ../src/lab.dotnet7.webapi/Dockerfile
-    #networks:
-      #- lab-network
-    env_file:
-      - ./env-file/dotnet7-webapi-otel.env
-    environment:
-      - REDISCONNECTION=redis:6379
-      - DBCONNECTION=User ID=postgres;Password=mysecretpassword;Host=postgres;Port=5432;Database=postgres;Pooling=true;
-    depends_on:
-      - lab-outbound-webapi
-      - redis
-      - otel-collector-contrib
-      - postgres
-
   lab-dotnet8-webapi:
     container_name: lab-dotnet8-webapi
     image: lab-dotnet8-webapi:dev

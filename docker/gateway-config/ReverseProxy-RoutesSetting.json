@@ -22,19 +22,6 @@
           }
         ]
       },
-      "dotnet7-webapi-route": {
-        "ClusterId": "dotnet7-webapi-cluster",
-        "AuthorizationPolicy": "Anonymous",
-        "CorsPolicy": "CorsPolicy",
-        "Match": {
-          "Path": "/api/dotnet7/{**catchall}"
-        },
-        "Transforms": [
-          {
-            "PathRemovePrefix": "/api/dotnet7"
-          }
-        ]
-      },
       "dotnet8-webapi-route": {
         "ClusterId": "dotnet8-webapi-cluster",
         "AuthorizationPolicy": "Anonymous",

@@ -15,13 +15,6 @@
           }
         }
       },
-      "dotnet7-webapi-cluster": {
-        "Destinations": {
-          "first_destination": {
-            "Address": "http://lab-dotnet7-webapi/"
-          }
-        }
-      },
       "dotnet8-webapi-cluster": {
         "Destinations": {
           "first_destination": {

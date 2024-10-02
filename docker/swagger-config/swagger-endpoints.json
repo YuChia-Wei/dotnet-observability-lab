@@ -11,14 +11,6 @@
       },
       {
         "EnableSwagger": true,
-        "ServiceName": "dotnet7-api",
-        "JsonUri": "http://lab-dotnet7-webapi/swagger/v1/swagger.json",
-        "ServerHostList": [
-          "http://localhost:8080/api/dotnet7"
-        ]
-      },
-      {
-        "EnableSwagger": true,
         "ServiceName": "dotnet8-api",
         "JsonUri": "http://lab-dotnet8-webapi:8080/swagger/v1/swagger.json",
         "ServerHostList": [
