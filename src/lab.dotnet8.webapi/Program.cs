@@ -2,6 +2,7 @@ using System.Net.Mime;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using lab.component.Extenstion;
+using lab.dotnet8.webapi.Infrastructure.ResponseWrapper;
 using lab.dotnet8.webapi.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -29,7 +30,11 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ApiResponseWrappingFilter>();
+    options.Filters.Add<ExceptionWrappingFilter>();
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

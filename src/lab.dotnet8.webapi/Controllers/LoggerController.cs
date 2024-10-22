@@ -1,3 +1,4 @@
+using lab.dotnet8.webapi.Infrastructure.ResponseWrapper;
 using Microsoft.AspNetCore.Mvc;
 using observability.component.Tracing;
 
@@ -22,6 +23,29 @@ public class LoggerController : ControllerBase
         this._logger.LogInformation("Throw Exception");
 
         throw new Dotnet8Exception();
+    }
+
+
+    /// <summary>
+    /// get error response by dotnet exception
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("exception/dotnet-exception")]
+    [ProducesResponseType<ApiResponse<ApiErrorInformation>>(200)]
+    public async Task<IActionResult> GetDotnetExceptionResponse()
+    {
+        throw new ArgumentOutOfRangeException();
+    }
+
+    /// <summary>
+    /// get error response by custom exception
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("exception/custom-exception")]
+    [ProducesResponseType<ApiResponse<ApiErrorInformation>>(200)]
+    public async Task<IActionResult> GetExceptionResponse()
+    {
+        throw new ErrorCodeException("err-my-error");
     }
 
     /// <summary>
