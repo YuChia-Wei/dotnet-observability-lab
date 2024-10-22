@@ -76,6 +76,9 @@ app.UseExceptionHandler(applicationBuilder =>
 {
     applicationBuilder.Run(async context =>
     {
+        var requiredService = context.RequestServices.GetRequiredService<ILogger<Program>>();
+        requiredService.LogCritical("in Program.cs start UseExceptionHandler");
+
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
         // using static System.Net.Mime.MediaTypeNames;
@@ -89,7 +92,7 @@ app.UseExceptionHandler(applicationBuilder =>
             RequestPath = $"{context.Request.Path}.{context.Request.Method}",
             Error = new ErrorInformation
             {
-                Message = exception.Message,
+                Message = "i'm exception handler middleware"+exception.Message,
                 Description = app.Environment.IsDevelopment() ? exception.ToString() : exception.Message
             }
         };
