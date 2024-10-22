@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using System.Net.Mime;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using lab.component.Extenstion;
+using lab.dotnet8.webapi.Infrastructure.ResponseWrapper;
 using lab.dotnet8.webapi.ViewModels;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -29,7 +31,11 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ApiResponseWrappingFilter>();
+    options.Filters.Add<ExceptionWrappingFilter>();
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -61,7 +67,7 @@ builder.Services.AddMediator(o => o.ServiceLifetime = ServiceLifetime.Scoped);
 //aspire component
 if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
 {
-    builder.AddServiceDefaults();
+    // builder.AddServiceDefaults();
 }
 
 var app = builder.Build();
@@ -71,22 +77,24 @@ app.UseExceptionHandler(applicationBuilder =>
 {
     applicationBuilder.Run(async context =>
     {
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        // 取得 ILogger 以便另外撰寫日誌
+        var logger = context.RequestServices.GetRequiredService<ILogger>();
 
-        // using static System.Net.Mime.MediaTypeNames;
-        context.Response.ContentType = MediaTypeNames.Text.Plain;
+        // 取得 IExceptionHandlerPathFeature 的資料，以便後續針對例外內容進行處理
+        var exception = context.Features.Get<IExceptionHandlerPathFeature>()!.Error;
 
-        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
-        var exception = exceptionHandlerPathFeature?.Error;
-        var failResultViewModel = new ErrorResultViewModel
+        logger.LogError("Exception occured: {ExceptionMessage} , Exception Description: {ExceptionDescription} ",
+                        exception.Message,
+                        exception.ToString());
+
+        // 建立包含錯誤資訊的 api response 物件
+        var failResultViewModel = new ApiResponse<ApiErrorInformation>
         {
+            // 取得該次錯誤時的追蹤編號以便設定在 error information 中
+            Id = Activity.Current?.TraceId.ToString() ?? Guid.NewGuid().ToString(),
             ApiVersion = context.ApiVersioningFeature().RawRequestedApiVersion,
             RequestPath = $"{context.Request.Path}.{context.Request.Method}",
-            Error = new ErrorInformation
-            {
-                Message = exception.Message,
-                Description = app.Environment.IsDevelopment() ? exception.ToString() : exception.Message
-            }
+            Data = exception.GetApiErrorInformation()
         };
 
         await context.Response.WriteAsJsonAsync(failResultViewModel);
@@ -122,7 +130,7 @@ app.UseAuthorization();
 //aspire middleware
 if (Environment.GetEnvironmentVariable("TRIGGER_BY_ASPIRE") == "TRUE")
 {
-    app.MapDefaultEndpoints();
+    // app.MapDefaultEndpoints();
 }
 
 app.MapControllers();

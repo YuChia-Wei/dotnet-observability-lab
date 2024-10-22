@@ -21,6 +21,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. docker-compose", "0. docker-compose", "{6564FE7B-3F81-4998-8D74-CA16E2F0A344}"
 	ProjectSection(SolutionItems) = preProject
 		..\docker\docker-compose.yaml = ..\docker\docker-compose.yaml
+		..\docker\docker-compose-signoz.yaml = ..\docker\docker-compose-signoz.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. swagger-ui", "5. swagger-ui", "{8E309C75-9F89-490A-9644-9D4C4454778E}"
