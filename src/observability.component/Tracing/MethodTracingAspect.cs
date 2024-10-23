@@ -16,5 +16,15 @@ public class MethodTracingAspect
         using var startActivity = TracingActivitySource.RegisteredActivity.StartActivity($"{hostType.Name}.{name}");
         var result = target(args);
         return result;
+        // try
+        // {
+        //     var result = target(args);
+        //     return result;
+        // }
+        // catch (Exception e)
+        // {
+        //     startActivity?.AddException(e);
+        //     throw;
+        // }
     }
 }

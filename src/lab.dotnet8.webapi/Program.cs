@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Mime;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
@@ -86,13 +87,17 @@ app.UseExceptionHandler(applicationBuilder =>
 
         var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
         var exception = exceptionHandlerPathFeature?.Error;
-        var failResultViewModel = new ErrorResultViewModel
+        var failResultViewModel = new ApiResponse<ApiErrorInformation>
         {
+            // 取得該次錯誤時的追蹤編號以便設定在 error information 中
+            Id = Activity.Current?.TraceId.ToString() ?? Guid.NewGuid().ToString(),
             ApiVersion = context.ApiVersioningFeature().RawRequestedApiVersion,
             RequestPath = $"{context.Request.Path}.{context.Request.Method}",
-            Error = new ErrorInformation
+
+            // 利用擴充方法來將例外資料轉為專用的錯誤回應資訊
+            Data = new ApiErrorInformation
             {
-                Message = "i'm exception handler middleware"+exception.Message,
+                Message = "i'm exception handler middleware" + exception.Message,
                 Description = app.Environment.IsDevelopment() ? exception.ToString() : exception.Message
             }
         };
