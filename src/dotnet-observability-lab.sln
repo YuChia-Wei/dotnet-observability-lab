@@ -21,7 +21,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. docker-compose", "0. docker-compose", "{6564FE7B-3F81-4998-8D74-CA16E2F0A344}"
 	ProjectSection(SolutionItems) = preProject
 		..\docker\docker-compose.yaml = ..\docker\docker-compose.yaml
-		..\docker\docker-compose-signoz.yaml = ..\docker\docker-compose-signoz.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. swagger-ui", "5. swagger-ui", "{8E309C75-9F89-490A-9644-9D4C4454778E}"
@@ -35,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab.Aspire.AppHost", "lab.Aspire.AppHost\lab.Aspire.AppHost.csproj", "{CCB3A405-488D-4B5E-ADD4-5ED35024DA8B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab.Aspire.ServiceDefaults", "lab.Aspire.ServiceDefaults\lab.Aspire.ServiceDefaults.csproj", "{B8D370D7-BD51-45DC-9ABD-C4E9C334C3C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lab.dotnet9.webapi", "lab.dotnet9.webapi\lab.dotnet9.webapi.csproj", "{2D121843-E467-42CA-8F4D-BD689EC7EB79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +79,10 @@ Global
 		{B8D370D7-BD51-45DC-9ABD-C4E9C334C3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8D370D7-BD51-45DC-9ABD-C4E9C334C3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8D370D7-BD51-45DC-9ABD-C4E9C334C3C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D121843-E467-42CA-8F4D-BD689EC7EB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D121843-E467-42CA-8F4D-BD689EC7EB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D121843-E467-42CA-8F4D-BD689EC7EB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D121843-E467-42CA-8F4D-BD689EC7EB79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A63F92E2-F20E-44C0-876F-396AFE30C9E9} = {82FBFE26-1506-4E11-A4D9-8D2A3D0A7400}
@@ -89,5 +94,6 @@ Global
 		{68A99654-BF85-438C-9620-FC5CAFC720E2} = {9F524A8D-650E-4887-8FF8-9ED21709BBD9}
 		{CCB3A405-488D-4B5E-ADD4-5ED35024DA8B} = {99FD1E78-DDE9-4617-B34E-A1A61F48DDBF}
 		{B8D370D7-BD51-45DC-9ABD-C4E9C334C3C8} = {99FD1E78-DDE9-4617-B34E-A1A61F48DDBF}
+		{2D121843-E467-42CA-8F4D-BD689EC7EB79} = {9F524A8D-650E-4887-8FF8-9ED21709BBD9}
 	EndGlobalSection
 EndGlobal
