@@ -22,7 +22,10 @@ public class WeatherForecastOutboundApiRepository
     /// <param name="endDate"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<WeatherForecast>> GetListAsync(DateOnly startDate, DateOnly endDate, CancellationToken cancellationToken)
+    public async Task<IEnumerable<WeatherForecast>> GetExceptionApiAsync(
+        DateOnly startDate,
+        DateOnly endDate,
+        CancellationToken cancellationToken)
     {
         var dataSource = Random.Shared.Next(1, 4) switch
         {
@@ -34,7 +37,64 @@ public class WeatherForecastOutboundApiRepository
         };
 
         var responseMessage =
-            await this._httpClient.GetAsync($"http://lab-outbound-webapi:8080/WeatherForecast/{dataSource}?startDate={startDate}&endDate={endDate}", cancellationToken);
+            await this._httpClient.GetAsync(
+                $"http://lab-outbound-webapi:8080/exception/{dataSource}?startDate={startDate}&endDate={endDate}",
+                cancellationToken);
+
+        var httpResponseMessage = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
+        var weatherForecasts = Parse<IEnumerable<WeatherForecast>>(httpResponseMessage);
+        return weatherForecasts;
+    }
+
+    public async Task<IEnumerable<WeatherForecast>> GetHttpClientExceptionAsync(
+        DateOnly queryStartDate,
+        DateOnly queryEndDate,
+        CancellationToken cancellationToken)
+    {
+        var dataSource = Random.Shared.Next(1, 4) switch
+        {
+            1 => "ef-core",
+            2 => "auto",
+            3 => "dapper",
+            4 => "redis",
+            _ => "auto"
+        };
+
+        var responseMessage =
+            await this._httpClient.GetAsync(
+                $"http://error-webapi:8080/exception/{dataSource}?startDate={queryStartDate}&endDate={queryEndDate}",
+                cancellationToken);
+
+        var httpResponseMessage = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
+        var weatherForecasts = Parse<IEnumerable<WeatherForecast>>(httpResponseMessage);
+        return weatherForecasts;
+    }
+
+    /// <summary>
+    /// Get by date range
+    /// </summary>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<WeatherForecast>> GetListAsync(
+        DateOnly startDate,
+        DateOnly endDate,
+        CancellationToken cancellationToken)
+    {
+        var dataSource = Random.Shared.Next(1, 4) switch
+        {
+            1 => "ef-core",
+            2 => "auto",
+            3 => "dapper",
+            4 => "redis",
+            _ => "auto"
+        };
+
+        var responseMessage =
+            await this._httpClient.GetAsync(
+                $"http://lab-outbound-webapi:8080/WeatherForecast/{dataSource}?startDate={startDate}&endDate={endDate}",
+                cancellationToken);
 
         var httpResponseMessage = await responseMessage.Content.ReadAsStringAsync(cancellationToken);
         var weatherForecasts = Parse<IEnumerable<WeatherForecast>>(httpResponseMessage);
@@ -61,7 +121,10 @@ public class WeatherForecastOutboundApiRepository
                 ex);
         }
 
-        var jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var jsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         return content.Deserialize<T>(jsonSerializerOptions) ?? default(T);
 

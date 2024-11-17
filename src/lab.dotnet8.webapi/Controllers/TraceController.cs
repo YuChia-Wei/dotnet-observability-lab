@@ -70,6 +70,34 @@ public class TraceController : ControllerBase
         return this.Ok(weatherForecast);
     }
 
+    [HttpGet("outbound-api/api-exception")]
+    public async Task<IActionResult> HttpOutboundApiException([FromQuery] DateOnly startDate, [FromQuery] DateOnly endDate)
+    {
+        var query = new OutboundExceptionApiQuery()
+        {
+            StartDate = startDate,
+            EndDate = endDate
+        };
+
+        var weatherForecast = await this._mediator.Send<IEnumerable<WeatherForecast>>(query);
+
+        return this.Ok(weatherForecast);
+    }
+
+    [HttpGet("outbound-api/httpClient-exception")]
+    public async Task<IActionResult> HttpClientException([FromQuery] DateOnly startDate, [FromQuery] DateOnly endDate)
+    {
+        var query = new OutboundApiHttpClientExceptionQuery
+        {
+            StartDate = startDate,
+            EndDate = endDate
+        };
+
+        var weatherForecast = await this._mediator.Send<IEnumerable<WeatherForecast>>(query);
+
+        return this.Ok(weatherForecast);
+    }
+
     [HttpGet("redis")]
     [ProducesDefaultResponseType(typeof(IEnumerable<WeatherForecast>))]
     public async Task<IActionResult> Redis([FromQuery] DateOnly startDate, [FromQuery] DateOnly endDate)
