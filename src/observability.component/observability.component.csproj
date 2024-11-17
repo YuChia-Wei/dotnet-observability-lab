@@ -8,7 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="AspectInjector" Version="2.8.2" />
-        <PackageReference Include="OpenTelemetry.Api" Version="1.9.0" />
+        <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0" />
     </ItemGroup>
 
 </Project>
