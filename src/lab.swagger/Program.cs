@@ -8,7 +8,9 @@ using lab.swagger.Infrastructure.ConfigureOptions;
 using lab.swagger.Infrastructure.Middleware;
 using lab.swagger.Infrastructure.ServiceCollectionExtension;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
+using Scalar.AspNetCore;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +76,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
+    // enable self open api document when environment is development
+    app.UseSwagger();
 }
 
 app.UseCors("CorsPolicy");
@@ -84,10 +89,15 @@ app.UseRouting();
 
 app.UseHealthChecks("/health");
 
-app.UseSwagger();
-
 //使用動態的 Swagger UI Endpoint List (Swagger UI Option)
 app.UseDynamicSwaggerUiEndpoint();
+
+// use scalar api ui
+app.MapScalarApiReference(options =>
+{
+    options.WithEndpointPrefix("/scalar/{documentName}");
+    options.WithOpenApiRoutePattern("/api/doc/{documentName}");
+});
 
 app.MapDefaultControllerRoute();
 
