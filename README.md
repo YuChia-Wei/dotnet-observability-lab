@@ -75,3 +75,10 @@ docker run -d \
   -p 5432:5432 \
   postgres:16-alpine
 ```
+
+## grafana dashboard
+
+這個 lab 支援以下兩個 grafana dashboard
+
+- [ASP.NET Core](https://grafana.com/grafana/dashboards/19924-asp-net-core/)
+- [ASP.NET Core Endpoint](https://grafana.com/grafana/dashboards/19925-asp-net-core-endpoint/)
