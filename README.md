@@ -82,3 +82,4 @@ docker run -d \
 
 - [ASP.NET Core](https://grafana.com/grafana/dashboards/19924-asp-net-core/)
 - [ASP.NET Core Endpoint](https://grafana.com/grafana/dashboards/19925-asp-net-core-endpoint/)
+- [OpenTelemetry dotnet webapi](https://grafana.com/grafana/dashboards/20568-opentelemetry-dotnet-webapi/)
